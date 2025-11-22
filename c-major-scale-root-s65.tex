@@ -1,0 +1,105 @@
+\documentclass[tikz]{standalone}
+\begin{document}
+\usetikzlibrary{math}
+\usetikzlibrary{calc}
+\begin{tikzpicture}
+% string locations
+\coordinate (s6) at (0,+0.25);
+\coordinate (s5) at (0,+0.75);
+\coordinate (s4) at ($(s5)!-1!(s6)$);
+\coordinate (s3) at ($(s4)!-1!(s5)$);
+\coordinate (s2) at ($(s3)!-1!(s4)$);
+\coordinate (s1) at ($(s2)!-1!(s3)$);
+% fret locations
+\tikzmath{\mihs = -pow(2,-1/12);}
+\coordinate (f0)  at (0,0);
+\coordinate (f1)  at (1,0);
+\coordinate (f2)  at ($(f1) !\mihs!(f0)$);
+\coordinate (f3)  at ($(f2) !\mihs!(f1)$);
+\coordinate (f4)  at ($(f3) !\mihs!(f2)$);
+\coordinate (f5)  at ($(f4) !\mihs!(f3)$);
+\coordinate (f6)  at ($(f5) !\mihs!(f4)$);
+\coordinate (f7)  at ($(f6) !\mihs!(f5)$);
+\coordinate (f8)  at ($(f7) !\mihs!(f6)$);
+\coordinate (f9)  at ($(f8) !\mihs!(f7)$);
+\coordinate (f10) at ($(f9) !\mihs!(f8)$);
+\coordinate (f11) at ($(f10)!\mihs!(f9)$);
+\coordinate (f12) at ($(f11)!\mihs!(f10)$);
+\coordinate (f13) at ($(f12)!\mihs!(f11)$);
+% use this path to extend bounding box to margins
+\coordinate (top) at ($(s1)!-0.5!(s2)$);
+\coordinate (bot) at ($(s6)!-0.5!(s5)$);
+\coordinate (right) at ($(f13)!-0.5!(f12)$);
+\coordinate (left) at ($(f0)!-0.5!(f1)$);
+\path (top -| right) coordinate (UR) -- (bot -| left) coordinate (LL);
+% draw frets
+\draw[line width=3pt] (f0  |- s1) -- (f0 |- s6);
+\draw[thick,gray]     (f1  |- s1) -- (f1 |- s6);
+\draw[thick,gray]     (f2  |- s1) -- (f2 |- s6);
+\draw[thick,gray]     (f3  |- s1) -- (f3 |- s6);
+\draw[thick,gray]     (f4  |- s1) -- (f4 |- s6);
+\draw[thick,gray]     (f5  |- s1) -- (f5 |- s6);
+\draw[thick,gray]     (f6  |- s1) -- (f6 |- s6);
+\draw[thick,gray]     (f7  |- s1) -- (f7 |- s6);
+\draw[thick,gray]     (f8  |- s1) -- (f8 |- s6);
+\draw[thick,gray]     (f9  |- s1) -- (f9 |- s6);
+\draw[thick,gray]     (f10 |- s1) -- (f10 |- s6);
+\draw[thick,gray]     (f11 |- s1) -- (f11 |- s6);
+\draw[thick,gray]     (f12 |- s1) -- (f12 |- s6);
+\draw[thick,gray]     (f13 |- s1) -- (f13 |- s6);
+% draw strings
+\draw[line width=0.3pt,gray] (s1 -| f0) -- (s1 -| UR);
+\draw[line width=0.3pt,gray] (s2 -| f0) -- (s2 -| UR);
+\draw[line width=0.6pt,gray] (s3 -| f0) -- (s3 -| UR);
+\draw[line width=0.6pt,gray] (s4 -| f0) -- (s4 -| UR);
+\draw[line width=1.2pt,gray] (s5 -| f0) -- (s5 -| UR);
+\draw[line width=1.5pt,gray] (s6 -| f0) -- (s6 -| UR);
+% fret midway points
+\coordinate (f0m) at ($(f0)!-0.25!(f1)$);
+\coordinate (f1m) at ($(f0)!0.5!(f1)$);
+\coordinate (f2m) at ($(f1)!0.5!(f2)$);
+\coordinate (f3m) at ($(f2)!0.5!(f3)$);
+\coordinate (f4m) at ($(f3)!0.5!(f4)$);
+\coordinate (f5m) at ($(f4)!0.5!(f5)$);
+\coordinate (f6m) at ($(f5)!0.5!(f6)$);
+\coordinate (f7m) at ($(f6)!0.5!(f7)$);
+\coordinate (f8m) at ($(f7)!0.5!(f8)$);
+\coordinate (f9m) at ($(f8)!0.5!(f9)$);
+\coordinate (f10m) at ($(f9)!0.5!(f10)$);
+\coordinate (f11m) at ($(f10)!0.5!(f11)$);
+\coordinate (f12m) at ($(f11)!0.5!(f12)$);
+\coordinate (f13m) at ($(f12)!0.5!(f13)$);
+% number the frets
+\foreach \i in {0,...,13}{
+  \path (f\i) node {\i};
+}
+% draw dots
+\coordinate (s2h3) at ($(s2)!0.5!(s3)$);
+\coordinate (s3h4) at ($(s3)!0.5!(s4)$);
+\coordinate (s4h5) at ($(s4)!0.5!(s5)$);
+\draw [gray] (f5m |- s3h4) circle (4pt);
+\draw [gray] (f7m |- s3h4) circle (4pt);
+% \draw [gray] (f9m |- s3h4) circle (4pt);
+\draw [gray] (f12m |- s2h3) circle (4pt);
+\draw [gray] (f12m |- s4h5) circle (4pt);
+% draw notes of interest
+% C major scale, one octave, 6th string root
+\draw [red] (f8m  |- s6) circle (5pt) node {2};
+\draw       (f10m |- s6) circle (5pt) node {4};
+\draw       (f7m  |- s5) circle (5pt) node {1};
+\draw       (f8m  |- s5) circle (5pt) node {2};
+\draw       (f10m |- s5) circle (5pt) node {4};
+\draw       (f7m  |- s4) circle (5pt) node {1};
+\draw       (f9m  |- s4) circle (5pt) node {3};
+\draw [red] (f10m |- s4) circle (5pt) node {4};
+% C major scale, one octave, 5th string root
+\draw [red] (f3m  |- s5) circle (5pt) node {2};
+\draw       (f5m  |- s5) circle (5pt) node {4};
+\draw       (f2m  |- s4) circle (5pt) node {1};
+\draw       (f3m  |- s4) circle (5pt) node {2};
+\draw       (f5m  |- s4) circle (5pt) node {4};
+\draw       (f2m  |- s3) circle (5pt) node {1};
+\draw       (f4m  |- s3) circle (5pt) node {3};
+\draw [red] (f5m  |- s3) circle (5pt) node {4};
+\end{tikzpicture}
+\end{document}
