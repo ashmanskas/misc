@@ -27,6 +27,10 @@
 # (somewhat computer-savvy) Penn instructors to use Anki flashcards
 # to memorize their own students' names.
 #
+# Related project, which I found after writing this:
+#
+#   - https://github.com/jlumbroso/anki-deck-generator
+#
 # Anki, by the way, is a convenient way to memorize almost anything.
 # I majored in physics in part because of a dislike for memorization.
 # If Anki had been around in 1989, I might have enjoyed organic
